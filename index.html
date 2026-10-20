@@ -17,7 +17,7 @@ const cv=document.getElementById('c'),ctx=cv.getContext('2d');cv.width=W*DPR;cv.
 const pt=(x,s=S,cx=CX,cy=CY)=>[cx+s*H*x[0],cy-s*(x[0]/2+x[1])];
 const C=a=>`rgb(${a[0]},${a[1]},${a[2]})`;
 /* ---------- fuente de 8 bits ---------- */
-const G={};[[" ","00000/00000/00000/00000/00000/00000/00000"],["P","11110/10001/10001/11110/10000/10000/10000"],["E","11111/10000/10000/11110/10000/10000/11111"],["R","11110/10001/10001/11110/10100/10010/10001"],["S","01111/10000/10000/01110/00001/00001/11110"],["C","01110/10001/10000/10000/10000/10001/01110"],["T","11111/00100/00100/00100/00100/00100/00100"],["I","11111/00100/00100/00100/00100/00100/11111"],["V","10001/10001/10001/10001/10001/01010/00100"],["A","01110/10001/10001/11111/10001/10001/10001"],["J","00111/00010/00010/00010/00010/10010/01100"],["U","10001/10001/10001/10001/10001/10001/01110"],["G","01110/10001/10000/10111/10001/10001/01110"],["D","11110/10001/10001/10001/10001/10001/11110"],["H","10001/10001/10001/11111/10001/10001/10001"],["M","10001/11011/10101/10101/10001/10001/10001"],["Z","11111/00001/00010/00100/01000/10000/11111"],["L","10000/10000/10000/10000/10000/10000/11111"],["N","10001/11001/10101/10011/10001/10001/10001"],["O","01110/10001/10001/10001/10001/10001/01110"],["F","11111/10000/10000/11110/10000/10000/10000"],["B","11110/10001/10001/11110/10001/10001/11110"],["K","10001/10010/10100/11000/10100/10010/10001"],["Q","01110/10001/10001/10001/10101/10010/01101"],["W","10001/10001/10001/10101/10101/11011/10001"],["X","10001/10001/01010/00100/01010/10001/10001"],["Y","10001/10001/01010/00100/00100/00100/00100"],[":","00000/00100/00100/00000/00100/00100/00000"],[".","00000/00000/00000/00000/00000/01100/01100"],["=","00000/00000/11111/00000/11111/00000/00000"],["-","00000/00000/00000/11111/00000/00000/00000"],["0","01110/10001/10011/10101/11001/10001/01110"],["1","00100/01100/00100/00100/00100/00100/01110"],["2","01110/10001/00001/00110/01000/10000/11111"],["3","11110/00001/00001/01110/00001/00001/11110"],["4","00010/00110/01010/10010/11111/00010/00010"],["5","11111/10000/11110/00001/00001/10001/01110"],["6","00110/01000/10000/11110/10001/10001/01110"],["7","11111/00001/00010/00100/01000/01000/01000"],["8","01110/10001/10001/01110/10001/10001/01110"],["9","01110/10001/10001/01111/00001/00010/01100"]].forEach(([c,r])=>G[c]=r.split('/'));
+const G={};[[" ","00000/00000/00000/00000/00000/00000/00000"],["P","11110/10001/10001/11110/10000/10000/10000"],["E","11111/10000/10000/11110/10000/10000/11111"],["R","11110/10001/10001/11110/10100/10010/10001"],["S","01111/10000/10000/01110/00001/00001/11110"],["C","01110/10001/10000/10000/10000/10001/01110"],["T","11111/00100/00100/00100/00100/00100/00100"],["I","11111/00100/00100/00100/00100/00100/11111"],["V","10001/10001/10001/10001/10001/01010/00100"],["A","01110/10001/10001/11111/10001/10001/10001"],["J","00111/00010/00010/00010/00010/10010/01100"],["U","10001/10001/10001/10001/10001/10001/01110"],["G","01110/10001/10000/10111/10001/10001/01110"],["D","11110/10001/10001/10001/10001/10001/11110"],["H","10001/10001/10001/11111/10001/10001/10001"],["M","10001/11011/10101/10101/10001/10001/10001"],["Z","11111/00001/00010/00100/01000/10000/11111"],["L","10000/10000/10000/10000/10000/10000/11111"],["N","10001/11001/10101/10011/10001/10001/10001"],["O","01110/10001/10001/10001/10001/10001/01110"],["F","11111/10000/10000/11110/10000/10000/10000"],["B","11110/10001/10001/11110/10001/10001/11110"],["K","10001/10010/10100/11000/10100/10010/10001"],["Q","01110/10001/10001/10001/10101/10010/01101"],["W","10001/10001/10001/10101/10101/11011/10001"],["X","10001/10001/01010/00100/01010/10001/10001"],["Y","10001/10001/01010/00100/00100/00100/00100"],[":","00000/00100/00100/00000/00100/00100/00000"],[".","00000/00000/00000/00000/00000/01100/01100"],["=","00000/00000/11111/00000/11111/00000/00000"],["-","00000/00000/00000/11111/00000/00000/00000"],["0","01110/10001/10011/10101/11001/10001/01110"],["1","00100/01100/00100/00100/00100/00100/01110"],["2","01110/10001/00001/00110/01000/10000/11111"],["3","11110/00001/00001/01110/00001/00001/11110"],["4","00010/00110/01010/10010/11111/00010/00010"],["5","11111/10000/11110/00001/00001/10001/01110"],["6","00110/01000/10000/11110/10001/10001/01110"],["7","11111/00001/00010/00100/01000/01000/01000"],["8","01110/10001/10001/01110/10001/10001/01110"],["9","01110/10001/10001/01111/00001/00010/01100"],["?","01110/10001/00001/00110/00100/00000/00100"]].forEach(([c,r])=>G[c]=r.split('/'));
 const sc={},WH=[255,255,255],LV=[196,186,255],DK=[26,22,60],GO1=[255,236,150],GO2=[255,210,63];
 function spr(t,e,c1=WH,c2=LV,sh=DK,gl=0){
   const k=[t,e,c1,c2,sh,gl].join('|');if(sc[k])return sc[k];
@@ -77,7 +77,7 @@ const resetT=()=>{acum=0;ini=null;iniciado=false;par=0;puntuada=false;puntaje=nu
 const tiempo=()=>acum+(ini?(performance.now()-ini)/1000:0);
 const completo=()=>movs>0&&figura(st);
 function nueva(f){facil=f;st=crear();hist=[];movs=0;anim=null;LC=null;vict=null;resetT()}
-function go(n){scr=n;pressed=null;if(n==='puntos')PT=cargar()}
+function go(n){scr=n;pressed=null;if(n==='tut')tp=0;if(n==='puntos')PT=cargar()}
 function girar(v,d){if(anim)return;const nx=tryMove(st,v,d);if(!nx)return;iniciado=true;anim={v,d,nx,t0:performance.now(),ids:Object.keys(st).filter(i=>st[i].some(x=>eq(x,v))).map(Number)}}
 function mezclar(){if(anim)return;let ap=0;for(let n=0;n<60;n++){const l=[...counts(st).values()].filter(o=>o.n===3);const nx=tryMove(st,l[Math.floor(Math.random()*l.length)].v,Math.random()<.5?1:-1);if(nx){st=nx;ap++}}hist=[];movs=0;resetT();par=Math.max(1,ap);LC=null;vict=null}
 function libreCache(){if(LC)return LC;const all=[],free=[];counts(st).forEach(o=>{if(o.n<3)return;const[x,y]=pt(o.v),f=o.n===3&&!!(tryMove(st,o.v,1)||tryMove(st,o.v,-1));all.push({x,y,f});if(f)free.push({x,y,v:o.v})});return LC={all,free}}
@@ -109,8 +109,9 @@ const pad=(v,n)=>String(v).padStart(n,' ');
 function menuScr(){
   pieces(INI,34,300,190);T('PERSPECTIVAS',300,345,7,WH,LV,DK,1);
   T('GIRA LAS PIEZAS. RECUPERA EL CUBO.',300,410,2,LV,LV,DK);
-  B('jugar','JUGAR',300,480,250,64,5,4,()=>go('modo'));
-  B('punt','PUNTUACIONES',300,555,330,52,3,3,()=>go('puntos'));
+  B('jugar','JUGAR',300,470,250,64,5,4,()=>{iniciarMusica();go('modo')});
+  B('tut','TUTORIAL',300,540,250,52,3,3,()=>go('tut'));
+  B('punt','PUNTUACIONES',300,606,330,52,3,3,()=>go('puntos'));
 }
 function modoScr(){
   T('ELIGE EL MODO',300,150,6,WH,LV,DK,1);
@@ -150,26 +151,99 @@ function gameScr(now){
     ctx.save();ctx.translate(CX,CY);ctx.scale(s,s);L.forEach(([t,e,a,b,sh,g,dy])=>T(t,0,dy,e,a,b,sh,g));ctx.restore();
   }
 }
+/* ---------- música ---------- */
+const AK='perspectivas_audio',AUDIO_SRC='audio/musica.mp3';
+let vol=0.2,muted=false,aud=null,audioErr=false,musicaOn=false,gain=null,dragVol=false; // volumen por defecto: 20 %
+try{const a=JSON.parse(localStorage.getItem(AK));if(a){muted=!!a.muted;if(isFinite(+a.vol))vol=Math.min(1,Math.max(0,+a.vol))}}catch(e){}
+const guardarAudio=()=>{try{localStorage.setItem(AK,JSON.stringify({vol,muted}))}catch(e){}};
+function aplicarAudio(){if(!aud)return;const v=muted?0:vol;if(gain)gain.gain.value=v;else{aud.volume=v;aud.muted=muted}}
+try{aud=new Audio();aud.loop=true;aud.preload='metadata';aud.addEventListener('error',()=>{audioErr=true});aud.src=AUDIO_SRC;aplicarAudio()}catch(e){audioErr=true}
+function iniciarMusica(){ // se llama desde un clic/toque en JUGAR: los navegadores no permiten sonido automático
+  if(audioErr||!aud||musicaOn)return;
+  if(!gain&&(/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))){
+    try{const AC=window.AudioContext||window.webkitAudioContext,ac=new AC();gain=ac.createGain();ac.createMediaElementSource(aud).connect(gain);gain.connect(ac.destination);ac.resume()}catch(e){gain=null} // iOS ignora audio.volume
+  }
+  aud.preload='auto';aplicarAudio();const pr=aud.play();if(pr&&pr.then)pr.then(()=>{musicaOn=true}).catch(()=>{});
+}
+document.addEventListener('visibilitychange',()=>{if(!aud||!musicaOn)return;if(document.hidden)aud.pause();else aud.play().catch(()=>{})});
+function setVol(p){vol=Math.min(1,Math.max(0,Math.round((p.x-470)/78*20)/20));if(vol>0)muted=false;aplicarAudio()}
+function audioUI(now){
+  if(audioErr)return; // si falta el archivo de audio, los controles no se muestran
+  const bx=572,by=28,bw=40,bh=36,r={id:'snd',x0:bx-bw/2,y0:by-bh/2,x1:bx+bw/2,y1:by+bh/2,fn:()=>{muted=!muted;aplicarAudio();guardarAudio()}};
+  btns.push(r);
+  const ins=ptr&&ptr.x>=r.x0&&ptr.x<=r.x1&&ptr.y>=r.y0&&ptr.y<=r.y1,s=ins&&pressed==='snd'?2:ins?1:0;
+  ctx.drawImage(bspr(' ',s,bw,bh,2,3),r.x0,r.y0,bw,bh);
+  const col=s===1?'#3c2878':'#ffffff';ctx.fillStyle=col;ctx.fillRect(bx-10,by-4,5,8);
+  ctx.beginPath();ctx.moveTo(bx-5,by-4);ctx.lineTo(bx+1,by-9);ctx.lineTo(bx+1,by+9);ctx.lineTo(bx-5,by+4);ctx.closePath();ctx.fill();
+  ctx.lineCap='butt';
+  if(muted){ctx.strokeStyle='#e53030';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(bx+5,by-5);ctx.lineTo(bx+13,by+5);ctx.moveTo(bx+13,by-5);ctx.lineTo(bx+5,by+5);ctx.stroke()}
+  else{ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.arc(bx+1,by,6,-.9,.9);ctx.stroke();ctx.beginPath();ctx.arc(bx+1,by,11,-.9,.9);ctx.stroke()}
+  const lv=Math.round(vol*10);ctx.globalAlpha=muted?.45:1;
+  for(let i=0;i<10;i++){const h=6+i*1.8;ctx.fillStyle=(i<lv||(i===0&&vol>0))?'#c4baff':'#3a3070';ctx.fillRect(470+i*8,44-h,6,h)}
+  ctx.globalAlpha=1;
+}
+/* ---------- tutorial ---------- */
+const INIH=[...counts(INI).values()].filter(o=>o.n>=3).map(o=>({v:o.v,f:o.n===3&&!!(tryMove(INI,o.v,1)||tryMove(INI,o.v,-1))}));
+let tutSt=crear(),tp=0;
+for(let i=0;i<14;i++){const l=[...counts(tutSt).values()].filter(o=>o.n===3),nx=tryMove(tutSt,l[(i*7)%l.length].v,i%2?1:-1);if(nx)tutSt=nx}
+function hing(s,cx,cy,now){const k=Math.max(.7,s/52);INIH.forEach(h=>{const[x,y]=pt(h.v,s,cx,cy),r=(h.f?7.5:6)*k;
+  if(h.f){ctx.beginPath();ctx.arc(x,y,r+3+2*Math.sin(now/220),0,7);ctx.strokeStyle='rgba(47,224,138,.45)';ctx.lineWidth=2;ctx.stroke()}
+  ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle='#000';ctx.fill();ctx.lineWidth=2.3*k;ctx.strokeStyle=h.f?'#2fe08a':'#e53030';ctx.stroke()})}
+function flecha(x,y){ctx.fillStyle='#c4baff';ctx.fillRect(x-22,y-4,28,8);ctx.beginPath();ctx.moveTo(x+4,y-14);ctx.lineTo(x+26,y);ctx.lineTo(x+4,y+14);ctx.closePath();ctx.fill()}
+const wd2=(l,e)=>(6*l.length-1)*e+44,GD=[60,40,0];
+const TUT=[
+{n:1,t:'CUAL ES TU OBJETIVO?',p:['Tu misión es resolver el tablero mediante la rotación de las piezas triangulares hasta alcanzar la configuración objetivo. Observa cómo se relacionan las piezas entre sí y descubre la secuencia de movimientos que te permitirá completar el desafío.'],
+ ill:()=>{pieces(tutSt,26,150,285);flecha(300,285);pieces(INI,26,450,285)}},
+{n:2,t:'APRENDE A MOVER LAS PIEZAS',p:['Selecciona un punto de rotación del tablero para girar las piezas asociadas a él. Cada movimiento modifica la posición de varias piezas, por lo que deberás analizar sus efectos antes de decidir tu siguiente jugada.','Importante: no todas las rotaciones son válidas. El tablero solo permitirá los movimientos que respeten sus restricciones geométricas.'],
+ ill:now=>{pieces(INI,36,300,285);hing(36,300,285,now)}},
+{n:3,t:'PLANIFICA ANTES DE ACTUAR',p:['Cada rotación puede acercarte a la solución o alejarte de ella. Observa el tablero, identifica las posiciones que necesitas corregir y anticipa cómo afectará cada movimiento al resto de las piezas.'],
+ ill:()=>pieces(tutSt,36,300,285)},
+{n:4,t:'CONTROLA TUS MOVIMIENTOS Y EL TIEMPO',p:['Durante la partida podrás consultar el tiempo transcurrido y la cantidad de movimientos realizados. Tu puntuación considera tanto la eficiencia de tus movimientos como la rapidez con la que resuelves el desafío.','Cuanto mejor planifiques, mayores serán tus posibilidades de conseguir una puntuación destacada.'],
+ ill:()=>{T('TIEMPO 01:23',300,225,3,LV,[150,140,220],DK);T('MOVIMIENTOS 24',300,280,3,WH,LV,DK);T('PUNTOS 7340',300,345,4,GO1,GO2,GD,1)}},
+{n:5,t:'ELIGE TU DIFICULTAD',p:['PERSPECTIVAS ofrece dos niveles de dificultad para que puedas familiarizarte con las mecánicas y poner a prueba tu capacidad de planificación espacial.','Comienza por el nivel que te resulte más cómodo y aumenta el desafío a medida que mejores tus resultados.'],
+ ill:now=>{pieces(INI,24,150,270);hing(24,150,270,now);pieces(INI,24,450,270);T('FACIL',150,372,3,GO1,GO2,GD);T('NORMAL',450,372,3,GO1,GO2,GD)}},
+{n:6,t:'SI NECESITAS CORREGIR UNA JUGADA',p:['Utiliza la opción de deshacer para volver al estado anterior y probar una estrategia diferente. También puedes iniciar una nueva partida para enfrentarte a otra configuración del tablero.'],
+ ill:()=>['DESHACER','MEZCLAR','REINICIAR'].forEach((l,i)=>{const w=wd2(l,2);ctx.drawImage(bspr(l,0,w,40,2,3),300-w/2,215+i*55,w,40)})},
+{n:7,t:'SUPERA TU PROPIO RECORD',p:['Al finalizar, revisa tu puntuación y compárala con tus mejores resultados. El juego conserva un registro de las diez mejores puntuaciones de cada dificultad en tu navegador.'],
+ ill:()=>{T('PUNTOS 9400',300,235,5,GO1,GO2,GD,1);T('NUEVO RECORD',300,305,3,WH,LV,DK);T('1. 9400   45 MOV  02:10',300,355,2,GO1,GO2,GD)}},
+{n:0,t:'ESTAS LISTO?',p:['Observa, analiza y rota con estrategia. En PERSPECTIVAS, cada movimiento cuenta y la solución depende de cómo interpretes el tablero.','¡Comienza a jugar y encuentra tu perspectiva!'],
+ ill:now=>{pieces(INI,36,300,285);hing(36,300,285,now)}}];
+function wrapT(t,n){const o=[];let l='';t.split(' ').forEach(w=>{const c=l?l+' '+w:w;if(c.length>n&&l){o.push(l);l=w}else l=c});o.push(l);return o}
+function wrapC(t,mw){const o=[];let l='';t.split(' ').forEach(w=>{const c=l?l+' '+w:w;if(ctx.measureText(c).width>mw&&l){o.push(l);l=w}else l=c});o.push(l);return o}
+function tutScr(now){
+  const P=TUT[tp];
+  T('PERSPECTIVAS',300,38,4,WH,LV,DK,1);T('TUTORIAL DE JUEGO',300,76,2,GO1,GO2,GD);
+  wrapT(P.n?P.n+'. '+P.t:P.t,30).forEach((l,i)=>T(l,300,118+i*34,3,WH,LV,DK));
+  P.ill(now);
+  ctx.fillStyle='rgba(10,8,30,.8)';ctx.fillRect(30,395,540,245);ctx.strokeStyle='#5446a4';ctx.lineWidth=2;ctx.strokeRect(31,396,538,243);
+  ctx.font='600 15px system-ui,"Segoe UI",sans-serif';ctx.textBaseline='top';ctx.textAlign='left';let y=412;
+  P.p.forEach(t=>{ctx.fillStyle=/^(Importante:|¡Comienza)/.test(t)?'#ffd23f':'#e8e4ff';wrapC(t,500).forEach(l=>{ctx.fillText(l,50,y);y+=21});y+=10});
+  TUT.forEach((_,i)=>{ctx.fillStyle=i===tp?'#ffd23f':'#5446a4';ctx.fillRect(300-72+i*18,656,10,10)});
+  if(tp>0)B('ta','ANTERIOR',110,706,190,44,2,3,()=>tp--);
+  B('tm','MENU',300,706,110,44,2,3,()=>go('menu'));
+  if(tp<7)B('ts','SIGUIENTE',490,706,190,44,2,3,()=>tp++);else B('tj','JUGAR',490,706,190,44,3,3,()=>{iniciarMusica();go('modo')});
+}
 function frame(now){
   update(now);btns=[];ctx.clearRect(0,0,W,HT);
   if(bgC)ctx.drawImage(bgC,0,0,W,HT);else{ctx.fillStyle='#1a2030';ctx.fillRect(0,0,W,HT)}
-  ({menu:menuScr,modo:modoScr,puntos:puntosScr,game:()=>gameScr(now)})[scr]();
+  ({menu:menuScr,modo:modoScr,puntos:puntosScr,tut:()=>tutScr(now),game:()=>gameScr(now)})[scr]();audioUI(now);
   requestAnimationFrame(frame);
 }
 /* ---------- entrada (mouse y toque) ---------- */
 const pos=e=>{const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*HT/r.height}};
-cv.addEventListener('pointermove',e=>{ptr=pos(e)});
+cv.addEventListener('pointermove',e=>{ptr=pos(e);if(dragVol)setVol(ptr)});
 cv.addEventListener('pointerleave',()=>{if(!pressed)ptr=null});
 cv.addEventListener('contextmenu',e=>e.preventDefault());
 cv.addEventListener('pointerdown',e=>{
   e.preventDefault();ptr=pos(e);const b=hit(ptr.x,ptr.y);if(b){pressed=b.id;return}
+  if(!audioErr&&ptr.x>=462&&ptr.x<=558&&ptr.y>=8&&ptr.y<=48){dragVol=true;setVol(ptr);return}
   if(scr!=='game'||anim)return;let best=null,d2=26*26;
   libreCache().free.forEach(h=>{const d=(h.x-ptr.x)**2+(h.y-ptr.y)**2;if(d<d2){d2=d;best=h}});
   if(best)girar(best.v,(cw?-1:1)*(e.button===2?-1:1));
 });
-const soltar=e=>{const p=pos(e),b=hit(p.x,p.y);if(b&&b.id===pressed)b.fn();pressed=null;if(e.pointerType==='touch')ptr=null};
+const soltar=e=>{const p=pos(e),b=hit(p.x,p.y);if(b&&b.id===pressed)b.fn();pressed=null;if(dragVol){dragVol=false;guardarAudio()}if(e.pointerType==='touch')ptr=null};
 cv.addEventListener('pointerup',soltar);
-cv.addEventListener('pointercancel',()=>{pressed=null;ptr=null});
-addEventListener('keydown',e=>{if(e.key==='Enter'&&scr==='menu')go('modo');if(e.key==='Escape'&&(scr==='modo'||scr==='puntos'))go('menu')});
+cv.addEventListener('pointercancel',()=>{pressed=null;ptr=null;dragVol=false});
+addEventListener('keydown',e=>{if(e.key==='Enter'&&scr==='menu'){iniciarMusica();go('modo')}if(e.key==='Escape'&&(scr==='modo'||scr==='puntos'||scr==='tut'))go('menu');if(scr==='tut'){if(e.key==='ArrowRight'&&tp<7)tp++;if(e.key==='ArrowLeft'&&tp>0)tp--}});
 requestAnimationFrame(frame);
 </script></body></html>
